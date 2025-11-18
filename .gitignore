@@ -1,6 +1,17 @@
 # Dependencies
 node_modules/
 
+# Environment & Credentials (IMPORTANT!)
+.env
+.env.local
+.env.production
+js/supabase-config.js
+
+# Supabase (keep the .example file but not the actual config)
+supabase/.temp/
+supabase/.branches/
+supabase/.git/
+
 # OS files
 .DS_Store
 Thumbs.db

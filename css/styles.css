@@ -37,6 +37,37 @@ header {
   z-index: 10;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-status {
+  font-size: 0.75rem;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(148,163,184,0.1);
+  border: 1px solid rgba(148,163,184,0.2);
+  color: var(--muted);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  display: none;
+}
+
+.admin-status.active {
+  display: inline-block;
+  background: var(--success-soft);
+  border-color: var(--success);
+  color: var(--success);
+}
+
+button.admin-active {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  color: white !important;
+  box-shadow: 0 10px 25px rgba(16,185,129,0.35) !important;
+}
+
 header h1 { 
   margin: 0; 
   font-size: 1.3rem; 
@@ -438,4 +469,187 @@ footer {
   text-align: center; 
   color: var(--muted);
   border-top: 1px solid rgba(148,163,184,0.1);
+}
+
+/* ===== MODALS ===== */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10,14,39,0.85);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.modal.active {
+  display: flex;
+  opacity: 1;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  background: linear-gradient(145deg, rgba(15,22,56,0.98), rgba(15,22,56,0.95));
+  border-radius: 16px;
+  border: 1px solid rgba(148,163,184,0.25);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow: hidden;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(148,163,184,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--text);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.modal-close:hover {
+  background: rgba(148,163,184,0.1);
+  color: var(--text);
+}
+
+.modal-body {
+  padding: 24px;
+  overflow-y: auto;
+  max-height: calc(90vh - 180px);
+}
+
+.modal-body p {
+  margin: 0 0 16px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.modal-body label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  display: block;
+  margin-bottom: 8px;
+  letter-spacing: 0.3px;
+}
+
+.modal-body input[type="password"],
+.modal-body input[type="text"] {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: rgba(10,14,39,0.98);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.modal-body input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-soft);
+}
+
+.modal-error {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: #ff6b6b;
+  min-height: 20px;
+}
+
+.modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid rgba(148,163,184,0.15);
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+/* Confirm modal specific styles */
+.confirm-player {
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(255,107,157,0.15), rgba(255,107,157,0.08));
+  border: 1px solid rgba(255,107,157,0.3);
+  border-radius: 12px;
+  margin: 16px 0;
+}
+
+.confirm-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.confirm-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -0.3px;
+}
+
+.confirm-details {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-align: center;
+  padding: 8px 0;
+}
+
+/* Disable controls for non-admin */
+textarea:disabled,
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+textarea:disabled {
+  background: rgba(10,14,39,0.5);
+  border-style: dashed;
 }

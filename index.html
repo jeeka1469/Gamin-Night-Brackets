@@ -6,12 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/png" href="logo.png" />
   <link rel="stylesheet" href="css/styles.css" />
+  
+  <!-- Supabase JS Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
   <header>
     <div>
       <h1><span></span> Anime Night Tournament</h1>
-      <div class="sub">Single-elimination • Click to advance winners</div>
+      <div class="sub">Single-elimination • Click to advance winners • Real-time sync enabled</div>
+    </div>
+    <div class="header-actions">
+      <button class="secondary" id="adminLoginBtn">🔐 Admin Login</button>
+      <span id="adminStatus" class="admin-status"></span>
     </div>
   </header>
 
@@ -63,6 +70,52 @@ Participant 3
 
   <footer>Single-elimination tournament bracket.</footer>
 
+  <!-- Admin Login Modal -->
+  <div id="adminModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Admin Login</h2>
+        <button class="modal-close" id="adminModalClose">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Enter your admin code to manage the tournament.</p>
+        <label for="adminCodeInput">Admin Code</label>
+        <input type="password" id="adminCodeInput" placeholder="Enter admin code" autocomplete="off" />
+        <div id="adminError" class="modal-error"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="secondary" id="adminCancelBtn">Cancel</button>
+        <button class="primary" id="adminSubmitBtn">Login</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Winner Confirmation Modal -->
+  <div id="confirmModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Confirm Winner</h2>
+        <button class="modal-close" id="confirmModalClose">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to advance this player to the next round?</p>
+        <div class="confirm-player">
+          <div class="confirm-label">Winner:</div>
+          <div class="confirm-name" id="confirmPlayerName"></div>
+        </div>
+        <div class="confirm-details">
+          <span id="confirmRoundInfo"></span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="secondary" id="confirmCancelBtn">Cancel</button>
+        <button class="primary" id="confirmSubmitBtn">✓ Confirm Winner</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Supabase Configuration (load before script.js) -->
+  <script src="js/supabase-config.js"></script>
   <script src="js/script.js"></script>
 </body>
 </html>
